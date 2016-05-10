@@ -9,7 +9,14 @@ module Instagram
   class NotFound < Error; end
 
   # Raised when Instagram returns the HTTP status code 429
-  class TooManyRequests < Error; end
+  class TooManyRequests < Error
+    attr_reader :response
+
+    def initialize(msg, response)
+      super msg
+      @response = response
+    end
+  end
 
   # Raised when Instagram returns the HTTP status code 500
   class InternalServerError < Error; end
